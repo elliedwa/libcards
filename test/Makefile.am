@@ -1,6 +1,12 @@
+TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
+	$(top_srcdir)/build-aux/tap-driver.sh
+
+
+check_LIBRARIES = libtap.a
+libtap_a_SOURCES = tap.c tap.h
+
+LDADD = $(top_builddir)/src/libcards.a libtap.a
 AM_CPPFLAGS = -I$(top_srcdir)/src
 check_PROGRAMS = test_deck
-test_deck_SOURCES = test_deck.c test.h
-test_deck_LDADD = $(top_builddir)/src/libcards.a
 
 TESTS = $(check_PROGRAMS)
