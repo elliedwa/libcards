@@ -3,6 +3,7 @@
 
 AC_PREREQ([2.71])
 AC_INIT([libcards], [0.0.1])
+AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall -Werror subdir-objects foreign])
 AC_CONFIG_SRCDIR([src/cards.c])
 AC_CONFIG_HEADERS([config.h])
@@ -24,4 +25,5 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  test/Makefile])
 
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 AC_OUTPUT
