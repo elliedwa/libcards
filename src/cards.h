@@ -5,6 +5,7 @@
 #include <stddef.h>
 
 #define CARDS_standard_deck_size 52
+#define CARDS_DECK_EMPTY (-1)
 
 enum CARDS_standard_suits {
         SPADES = 0,
@@ -168,5 +169,8 @@ int CARDS_deck_pop(struct CARDS_deck_s *D);
 int CARDS_deck_draw(struct CARDS_deck_s *D);
 int CARDS_deck_peek(struct CARDS_deck_s *D);
 bool CARDS_deck_isempty(struct CARDS_deck_s *D);
+
+/* shuffles deck in place */
+void CARDS_deck_shuffle(struct CARDS_deck_s *D);
 
 #endif // CARDS_H_
