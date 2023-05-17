@@ -1,4 +1,4 @@
-#include "../src/cards.h"
+#include "../src/deck.h"
 #include "fff.h"
 #include "tap.h"
 #include "test_deck_data.h"

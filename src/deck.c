@@ -1,4 +1,4 @@
-#include "cards.h"
+#include "deck.h"
 #include "rand.h"
 #include <stdbool.h>
 #include <stddef.h>
