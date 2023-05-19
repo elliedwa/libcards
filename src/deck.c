@@ -1,5 +1,6 @@
 #include "deck.h"
-#include "rand.h"
+#include <cards/cards.h>
+#include <cards/rand.h>
 /* #define NDEBUG */
 #include <assert.h>
 #include <stdbool.h>

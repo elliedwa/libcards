@@ -1,4 +1,4 @@
-#include "rand.h"
+#include "rand_p.h"
 #include <limits.h>
 #include <stdint.h>
 
