@@ -1,21 +1,26 @@
-#include "../src/rand.h"
 #include "tap.h"
+#include <assert.h>
+#include <cards/rand.h>
 #include <float.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <time.h>
 
-#define NUM_SAMPLES 0x100000000
+#define NUM_SAMPLES 0x1000000
 #define NUM_CARDS 52
 
 double
-chi_squared_uniform(int dist[NUM_CARDS], int expected)
+chi_squared_uniform(const long dist[NUM_CARDS], long expected)
 {
+        assert(expected != 0);
         double chi_2 = 0.;
-        for (int i = 0; i < NUM_CARDS; i++) {
-                chi_2 +=
-                    pow((double)(dist[i] - expected), 2) / (double)expected;
+        double actual;
+        for (unsigned long i = 0; i < NUM_CARDS; i++) {
+                double diff = (double)(dist[i] - expected);
+                actual = (pow(diff, 2)) / (double)expected;
+                assert(actual <= 100.);
+                chi_2 += actual;
         }
         return chi_2;
 }
@@ -25,10 +30,10 @@ main(void)
 {
         CARDS_srand((uint64_t)time(NULL));
         clock_t start_clock = clock();
-        int dist[NUM_CARDS] = {0};
+        long dist[NUM_CARDS] = {0};
         uint64_t current;
-        /* plan(3); */
-        plan(SKIP_ALL);
+        plan(3);
+        /* plan(SKIP_ALL); */
         for (long i = 0; i < NUM_SAMPLES; i++) {
                 current = CARDS_rand_range(0, NUM_CARDS - 1);
                 if (current >= NUM_CARDS) {

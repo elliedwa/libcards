@@ -1,9 +1,11 @@
 ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I$(top_srcdir)/include
+AM_CFLAGS = -Wall -Wextra -Wpedantic -std=c99
 
 noinst_LIBRARIES = lib/libcards.a
-lib_libcards_a_SOURCES = src/deck.c src/deck.h src/rand.c src/rand.h
-nobase_include_HEADERS = include/cards/cards.h include/cards/decks/standard.h
+lib_libcards_a_SOURCES = src/deck.c src/deck.h src/rand.c src/rand_p.h
+nobase_include_HEADERS = include/cards/cards.h include/cards/decks/standard.h \
+	include/cards/rand.h
 
 TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 	$(top_srcdir)/build-aux/tap-driver.sh
@@ -11,7 +13,7 @@ TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 
 TEST_COMMON = test/tap.h test/tap.c test/fff.h
 CARDS = src/deck.c src/deck.h
-RAND = src/rand.c src/rand.h
+RAND = src/rand.c
 
 
 check_PROGRAMS = test/cards.test test/rand.test test/shuffle.test

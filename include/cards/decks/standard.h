@@ -33,7 +33,7 @@ CARDS_STANDARD_card_struct(int card)
         struct CARDS_STANDARD_card_s card_s = {
             card / CARDS_STANDARD_SUIT_WIDTH, card % CARDS_STANDARD_SUIT_WIDTH};
         return card_s;
-};
+}
 
 int
 CARDS_STANDARD_struct_to_int(struct CARDS_STANDARD_card_s card)
