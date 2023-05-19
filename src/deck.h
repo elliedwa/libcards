@@ -9,11 +9,12 @@
 
 /* this is a stack for now but should ultimately be a deque */
 struct CARDS_deck_s {
+        const int suit_width;
         size_t top;
         int *array;
 };
 
-struct CARDS_deck_s *CARDS_deck_init(const int num_suits, const int num_values);
+struct CARDS_deck_s *CARDS_deck_init(int num_suits, int num_values);
 void CARDS_deck_destroy(struct CARDS_deck_s *D);
 void CARDS_deck_push(struct CARDS_deck_s *D, int card);
 int CARDS_deck_pop(struct CARDS_deck_s *D);
