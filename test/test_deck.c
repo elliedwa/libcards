@@ -1,6 +1,6 @@
-#include "../src/deck.h"
-#include "../src/decks/standard.h"
 #include "tap.h"
+#include <cards/cards.h>
+#include <cards/decks/standard.h>
 
 #define CARDS_TEST_NUM_VALUES 4
 #define CARDS_TEST_NUM_SUITS NO_SUITS

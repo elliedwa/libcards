@@ -1,7 +1,7 @@
-#include "../src/deck.h"
-#include "../src/decks/standard.h"
 #include "fff.h"
 #include "tap.h"
+#include <cards/cards.h>
+#include <cards/decks/standard.h>
 #include <stdint.h>
 DEFINE_FFF_GLOBALS
 FAKE_VALUE_FUNC(uint64_t, CARDS_rand);
