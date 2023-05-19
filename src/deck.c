@@ -1,23 +1,50 @@
 #include "deck.h"
 #include "rand.h"
+#include <assert.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <time.h>
 
+static struct CARDS_deck_s *
+_CARDS_deck_init_no_suits(int num_values)
+{
+        const int n_cards = num_values;
+        int *array = malloc(sizeof(int) * n_cards * 2);
+        int top = 0;
+        for (int value = 0; value < num_values; value++) {
+                assert(top <= n_cards);
+                array[top++] = value;
+        }
+        struct CARDS_deck_s *deck = malloc(sizeof(*array) + sizeof(top));
+        if (!deck) {
+                return NULL;
+        }
+        deck->top = top;
+        deck->array = array;
+        return deck;
+}
+
 struct CARDS_deck_s *
-CARDS_deck_init(const void *decklist, size_t n_cards)
+CARDS_deck_init(const int num_suits, const int num_values)
 {
         CARDS_srand((uint64_t)time(NULL));
 
+        if (num_suits == NO_SUITS) {
+                return _CARDS_deck_init_no_suits(num_values);
+        }
+        const int n_cards = num_suits * num_values;
         int *array = malloc(sizeof(int) * n_cards * 2);
         if (!array) {
                 return NULL;
         }
-        size_t top = 0;
-        for (; top < n_cards; top++) {
-                array[top] = ((int *)decklist)[top];
+        int top = 0;
+        for (int suit = 0; suit < num_suits; suit++) {
+                for (int value = 0; value < num_values; value++) {
+                        assert(top <= n_cards);
+                        array[top++] = suit * 0x10 + value;
+                }
         }
         struct CARDS_deck_s *deck = malloc(sizeof(*array) + sizeof(top));
         if (!deck) {
