@@ -1,12 +1,31 @@
+/*
+Copyright 2023 Elliot C. Edwards
+
+This file is part of libcards.
+
+libcards is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+libcards is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+libcards. If not, see <https://www.gnu.org/licenses/>.
+*/
 #include "fff.h"
 #include "tap.h"
 #include <cards/cards.h>
 #include <cards/decks/standard.h>
 #include <stdint.h>
+/* NOLINTBEGIN */
 DEFINE_FFF_GLOBALS
-FAKE_VALUE_FUNC(uint64_t, CARDS_rand);
-FAKE_VOID_FUNC(CARDS_srand, uint64_t);
-FAKE_VALUE_FUNC(uint64_t, CARDS_rand_range, uint64_t, uint64_t);
+FAKE_VALUE_FUNC(uint64_t, CARDS_rand)
+FAKE_VOID_FUNC(CARDS_srand, uint64_t)
+FAKE_VALUE_FUNC(uint64_t, CARDS_rand_range, uint64_t, uint64_t)
+/* NOLINTEND */
 
 #define CARDS_TEST_NUM_VALUES 4
 #define CARDS_TEST_NUM_SUITS NO_SUITS

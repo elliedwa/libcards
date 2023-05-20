@@ -1,10 +1,34 @@
+/*
+Copyright 2023 Elliot C. Edwards
+
+This file is part of libcards.
+
+libcards is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+libcards is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+libcards. If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #include "rand_p.h"
 #include <limits.h>
 #include <stdint.h>
 
 #define CARDS_RAND_MAX UINT64_MAX
 
-/* xoshiro256** by David Blackman and Sebastiano Vigna */
+/* xoshiro256** by David Blackman and Sebastiano Vigna
+ * Dedicated to public domain by authors
+ * Original code can be found at https://prng.di.unimi.it/xoshiro256starstar.c
+ */
+
+/* The whole point is magic numbers so clang-tidy can relax */
+/* NOLINTBEGIN(readability-magic-numbers) */
 
 static inline uint64_t
 rotl(const uint64_t x, int k)
@@ -31,7 +55,10 @@ xoshiro_next(void)
         return result;
 }
 
-/* SplitMix64 by Sebastiano Vigna */
+/* SplitMix64 by Sebastiano Vigna
+ * Dedicated to public domain by author
+ * Original code can be found at https://prng.di.unimi.it/splitmix64.c
+ */
 
 static uint64_t splitmix_state;
 
@@ -64,3 +91,4 @@ CARDS_srand(uint64_t seed)
                 xoshiro_state[i] = splitmix_next();
         }
 }
+/* NOLINTEND(readability-magic-numbers) */
