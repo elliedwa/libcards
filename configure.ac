@@ -20,14 +20,15 @@
 AC_PREREQ([2.71])
 AC_INIT([libcards], [0.0.2])
 AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall -Werror subdir-objects foreign])
 AC_CONFIG_SRCDIR([src/deck.c])
 AC_CONFIG_HEADERS([config.h])
 
+
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_AR
-AC_PROG_RANLIB
 
 # Checks for libraries.
 
@@ -40,4 +41,5 @@ AC_PROG_RANLIB
 AC_CONFIG_FILES([Makefile])
 
 AC_REQUIRE_AUX_FILE([tap-driver.sh])
+LT_INIT
 AC_OUTPUT

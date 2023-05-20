@@ -19,8 +19,8 @@ ACLOCAL_AMFLAGS = -I m4
 AM_CPPFLAGS = -I$(top_srcdir)/include
 AM_CFLAGS = -Wall -Wextra -Wpedantic -std=c99
 
-noinst_LIBRARIES = lib/libcards.a
-lib_libcards_a_SOURCES = src/deck.c src/deck.h src/rand.c src/rand_p.h
+lib_LTLIBRARIES = lib/libcards.la
+lib_libcards_la_SOURCES = src/deck.c src/deck.h src/rand.c src/rand_p.h
 nobase_include_HEADERS = include/cards/cards.h include/cards/decks/standard.h \
 	include/cards/rand.h
 
@@ -35,10 +35,16 @@ RAND = src/rand.c
 
 check_PROGRAMS = test/cards.test test/rand.test test/shuffle.test
 test_cards_test_SOURCES = test/test_deck.c $(CARDS) $(RAND) $(TEST_COMMON)
+# unit tests can't link against the library, but automake won't let us use object files with
+# the same basename as the ones compiled by libtool. the automake manual suggests this
+# workaround.
+test_cards_test_CFLAGS = $(AM_CFLAGS)
 test_rand_test_SOURCES = test/test_rand.c $(CARDS) $(RAND) $(TEST_COMMON)
+test_rand_test_CFLAGS = $(AM_CFLAGS)
 
 # rand is fake in test_shuffle
 test_shuffle_test_SOURCES = test/test_shuffle.c $(CARDS) $(TEST_COMMON)
+test_shuffle_test_CFLAGS = $(AM_CFLAGS)
 
 
 TESTS = $(check_PROGRAMS)
