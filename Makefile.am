@@ -13,7 +13,7 @@ TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 
 TEST_COMMON = test/tap.h test/tap.c test/fff.h
 CARDS = src/deck.c src/deck.h
-RAND = src/rand.c src/rand.h
+RAND = src/rand.c
 
 
 check_PROGRAMS = test/cards.test test/rand.test test/shuffle.test
