@@ -25,7 +25,7 @@ libcards. If not, see <https://www.gnu.org/licenses/>.
 #include <stdint.h>
 #include <time.h>
 
-#define NUM_SAMPLES 0x1000000
+#define NUM_SAMPLES 0x30000000
 #define NUM_CARDS 52
 
 double
