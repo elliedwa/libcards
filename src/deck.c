@@ -57,7 +57,7 @@ CARDS_deck_init(const int num_suits, const int num_values)
         }
         const int suit_width = num_values > 0x10 ? 0x20 : 0x10;
 
-        const int n_cards = num_suits * num_values;
+        const unsigned int n_cards = num_suits * num_values;
         int *array = malloc(sizeof(int) * n_cards * 2);
         if (!array) {
                 return NULL;
