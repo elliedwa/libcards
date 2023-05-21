@@ -29,21 +29,21 @@ TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 
 
 TEST_COMMON = test/tap.h test/tap.c test/fff.h
-CARDS = src/deck.c src/deck.h
+DECK = src/deck.c src/deck.h
 RAND = src/rand.c
 
 
 check_PROGRAMS = test/cards.test test/rand.test test/shuffle.test
-test_cards_test_SOURCES = test/test_deck.c $(CARDS) $(RAND) $(TEST_COMMON)
+test_cards_test_SOURCES = test/test_deck.c $(DECK) $(RAND) $(TEST_COMMON)
 # unit tests can't link against the library, but automake won't let us use object files with
 # the same basename as the ones compiled by libtool. the automake manual suggests this
 # workaround.
 test_cards_test_CFLAGS = $(AM_CFLAGS)
-test_rand_test_SOURCES = test/test_rand.c $(CARDS) $(RAND) $(TEST_COMMON)
+test_rand_test_SOURCES = test/test_rand.c $(DECK) $(RAND) $(TEST_COMMON)
 test_rand_test_CFLAGS = $(AM_CFLAGS)
 
 # rand is fake in test_shuffle
-test_shuffle_test_SOURCES = test/test_shuffle.c $(CARDS) $(TEST_COMMON)
+test_shuffle_test_SOURCES = test/test_shuffle.c $(DECK) $(TEST_COMMON)
 test_shuffle_test_CFLAGS = $(AM_CFLAGS)
 
 
