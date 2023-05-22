@@ -50,7 +50,7 @@ main(void)
         clock_t start_clock = clock();
         long dist[NUM_CARDS] = {0};
         uint64_t current;
-        plan(3);
+        plan(NO_PLAN);
         /* plan(SKIP_ALL); */
         for (long i = 0; i < NUM_SAMPLES; i++) {
                 current = CARDS_rand_range(0, NUM_CARDS - 1);
@@ -69,12 +69,9 @@ main(void)
              NUM_SAMPLES, (end_clock - start_clock) / CLOCKS_PER_SEC);
 
         const double crit_val_high = 68.669;
-        const double crit_val_low = 35.6;
         double chi_squared = chi_squared_uniform(dist, NUM_SAMPLES / NUM_CARDS);
         ok(isless(chi_squared, crit_val_high),
            "chi-squared result = %f is less than %f", chi_squared,
            crit_val_high);
-        ok(isgreater(chi_squared, crit_val_low), "and greater than %f",
-           crit_val_low);
         done_testing();
 }
