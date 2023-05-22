@@ -19,6 +19,7 @@ libcards. If not, see <https://www.gnu.org/licenses/>.
 #ifndef STANDARD_H_
 #define STANDARD_H_
 
+#include "cards/cards.h"
 #include <stdio.h>
 #define CARDS_STANDARD_NUM_SUITS 4U
 #define CARDS_STANDARD_NUM_VALUES 13U
@@ -57,6 +58,13 @@ int
 CARDS_STANDARD_struct_to_int(struct CARDS_STANDARD_card_s card)
 {
         return card.suit * CARDS_STANDARD_SUIT_WIDTH + card.value;
+}
+
+struct CARDS_deck_s *
+CARDS_STANDARD_deck_create(void)
+{
+        return CARDS_deck_init(CARDS_STANDARD_NUM_SUITS,
+                               CARDS_STANDARD_NUM_VALUES);
 }
 
 #endif // STANDARD_H_
