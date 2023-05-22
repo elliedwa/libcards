@@ -36,7 +36,12 @@ main(void)
         cmp_ok(D_std->top,
                "==", CARDS_STANDARD_NUM_SUITS * CARDS_STANDARD_NUM_VALUES,
                "new deck's top == deck size");
-        cmp_ok(CARDS_deck_peek(D_std), "==", 0x3c);
+        cmp_ok(CARDS_deck_peek(D_std), "==", 0x3c,
+               "top card of uninitialized standard deck is KS");
+        struct CARDS_deck_s *D_conv = CARDS_STANDARD_deck_create();
+        cmp_mem(D_conv->array, D_std->array,
+                sizeof(D_std->array[0]) * CARDS_STANDARD_DECK_SIZE,
+                "CARDS_STANDARD_deck_create() works as expected");
 
         struct CARDS_deck_s *D_test =
             CARDS_deck_init(CARDS_TEST_NUM_SUITS, CARDS_TEST_NUM_VALUES);
@@ -51,5 +56,7 @@ main(void)
                "pop, but deck is empty");
         cmp_ok(CARDS_DECK_EMPTY, "==", CARDS_deck_peek(D_test),
                "peek, but deck is empty");
+        CARDS_deck_destroy(D_std);
+        CARDS_deck_destroy(D_test);
         done_testing();
 }
